@@ -1,6 +1,10 @@
 const inquirer = require('inquirer');
 const fs = require('fs');
-
+        // const employeeName = `${answers.employeeName}`;
+        // const employeeRole = `${answers.employeeRole}`;
+        // const employeeId = `${answers.EmployeeId}`;
+        // const employeeEmail = `${answers.employeeEmail}`;
+        // })
 const questions = [{
         type: 'input',
         name: 'employeeName',
@@ -22,18 +26,21 @@ const questions = [{
         message: 'Are you a manager, engineer, or intern?',
         choices: ['Manager', 'Engineer', 'Intern']
     },
+    {
+        type: 'confirm',
+        name: 'addAnotherEmployee',
+        message: 'Would you like to add another team member?'
+    }
 ];
 
 function employeeQuestions() {
-    inquirer.prompt(questions).then(answers => {
-        const employeeName = `${answers.employeeName}`;
-        const employeeRole = `${answers.employeeRole}`;
-        const employeeId = `${answers.EmployeeId}`;
-        const employeeEmail = `${answers.employeeEmail}`;
-        })
-};
+    console.log('Add a team member or two!')
+    inquirer.prompt(questions)
+        .then(answers => {
+            console.log(`${answers.addAnotherEmployee}`);
+    });
 function managerQuestions() {
-    console.log("Please build your team");
+    console.log("Build your team!");
     inquirer.prompt([
       {
         type: "input",
@@ -75,10 +82,12 @@ function managerQuestions() {
         }
       }
     ]).then(answers => {
-      teamQuestions()
+      employeeQuestions()
+      
     });
   }
-  
+};
+
 managerQuestions();
 
 module.exports();
