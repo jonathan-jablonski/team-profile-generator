@@ -13,16 +13,15 @@ function employeeQuestions() {
             type: 'input',
             name: 'employeeEmail',
             message: "What's your email address?"
+        },
+        {
+            type: 'list',
+            name: 'employeeRole',
+            message: 'Are you a manager, engineer, or intern?',
+            choices: ['Manager', 'Engineer', 'Intern']
         })
-        .then(() => {
-            inquirer
-                .prompt({
-                    type: 'list',
-                    name: 'employeeRole',
-                    message: 'Are you a manager, engineer, or intern?',
-                    choices: ['Manager', 'Engineer', 'Intern'],
-                });
-            });
-        };
-
+        .then((employeeInfo) => {
+            
+        })
+    };
 employeeQuestions();
