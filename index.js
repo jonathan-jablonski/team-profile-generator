@@ -21,8 +21,7 @@ const questions = [{
 
 function employeeQuestions() {
     inquirer.prompt(questions).then(answers => {
-        console.log(answers)
-         
+        const employeeRole = `${answers.employeeRole}`;
         })
 };
 employeeQuestions();
