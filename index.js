@@ -87,7 +87,7 @@ function managerQuestions() {
         }
       }
     ]).then(answers => {
-      console.log('Manage Answers', answers);
+      const employeeInfo = new Employee(response);
       employeeQuestions();
     });
   }
