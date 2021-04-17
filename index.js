@@ -1,29 +1,24 @@
 const inquirer = require('inquirer');
 const fs = require('fs');
-        // const employeeName = `${answers.employeeName}`;
-        // const employeeRole = `${answers.employeeRole}`;
-        // const employeeId = `${answers.EmployeeId}`;
-        // const employeeEmail = `${answers.employeeEmail}`;
-        // })
 const questions = [{
         type: 'input',
         name: 'employeeName',
-        message: "What's your first and last name?"
+        message: "What's their first and last name?"
     },
     {
         type: 'input',
         name: 'employeeId',
-        message: "What's your employee ID?"
+        message: "What's their employee ID?"
     },
     {
         type: 'input',
         name: 'employeeEmail',
-        message: "What's your email address?"
+        message: "What's their email address?"
     },
     {
         type: 'list',
         name: 'employeeRole',
-        message: 'Are you a manager, engineer, or intern?',
+        message: 'Are they a manager, engineer, or intern?',
         choices: ['Manager', 'Engineer', 'Intern']
     },
     {
@@ -32,13 +27,23 @@ const questions = [{
         message: 'Would you like to add another team member?'
     }
 ];
-
 function employeeQuestions() {
     console.log('Add a team member or two!')
     inquirer.prompt(questions)
         .then(answers => {
             console.log(`${answers.addAnotherEmployee}`);
+        const employeeName = `${answers.employeeName}`;
+        const employeeRole = `${answers.employeeRole}`;
+        const employeeId = `${answers.EmployeeId}`;
+        const employeeEmail = `${answers.employeeEmail}`;
+        console.log(employeeName, employeeEmail, employeeId, employeeRole)
+        if (answers.addAnotherEmployee) {
+          employeeQuestions();
+        } else {
+          console.log('All Done');
+        }
     });
+}
 function managerQuestions() {
     console.log("Build your team!");
     inquirer.prompt([
@@ -82,12 +87,8 @@ function managerQuestions() {
         }
       }
     ]).then(answers => {
-      employeeQuestions()
-      
+      console.log('Manage Answers', answers);
+      employeeQuestions();
     });
   }
-};
-
 managerQuestions();
-
-module.exports();
