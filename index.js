@@ -50,7 +50,7 @@ function managerQuestions() {
       {
         type: "input",
         name: "managerName",
-        message: "What is the team manager's name?",
+        message: "Team Manager:",
         validate: answer => {
           if (answer !== "") {
             return true;
@@ -61,7 +61,7 @@ function managerQuestions() {
       {
         type: "input",
         name: "managerId",
-        message: "What is the team manager's id?",
+        message: "Team Manager ID Number:",
         validate: answer => {
           const pass = answer.match(
             /^[1-9]\d*$/
@@ -75,7 +75,7 @@ function managerQuestions() {
       {
         type: "input",
         name: "managerEmail",
-        message: "What is the team manager's email?",
+        message: "Team Manager Email Address:",
         validate: answer => {
           const pass = answer.match(
             /\S+@\S+\.\S+/
@@ -87,7 +87,7 @@ function managerQuestions() {
         }
       }
     ]).then(answers => {
-      console.log('Manage Answers', answers);
+      const employeeInfo = new Employee(response);
       employeeQuestions();
     });
   }
