@@ -5,6 +5,7 @@ const intern = require('./lib/intern');
 const teamMembers = [];
 const inquirer = require('inquirer');
 const fs = require('fs');
+const Intern = require('./lib/intern');
 
 // Employee questions
 const baseQuestions = [
@@ -50,7 +51,7 @@ const internQuestion = [
   {
     type: 'input',
     name: 'school',
-    message: "School: "
+    message: "School:"
   },
   {
     type: 'confirm',
@@ -60,7 +61,7 @@ const internQuestion = [
 ];
 
 function employeeQuestions() {
-  console.log('Add a team member or two!')
+  console.log('Add a team member!')
   inquirer.prompt(baseQuestions)
     .then(answers => {
       console.log(`${answers.addAnotherEmployee}`);
@@ -68,7 +69,7 @@ function employeeQuestions() {
       const employeeRole = `${answers.employeeRole}`;
       const employeeId = `${answers.EmployeeId}`;
       const employeeEmail = `${answers.employeeEmail}`;
-      employeeQuestions();
+      const addAnotherEmployee = `${answers.addAnotherEmployee}`;
       if (answers.employeeRole === 'Engineer') {
         inquirer.prompt(engiQuestion).then((engineerInfo) => {
           const engineer = new Engineer(
@@ -77,19 +78,22 @@ function employeeQuestions() {
             answers.employeeRole,
             answers.github
           );
-          console.log(engineerInfo);
+          teamMembers.push(engineer);
         }
         );
       } else if (answers.employeeRole === 'Intern') {
         inquirer.prompt(internQuestion).then((internInfo) => {
           console.log(internInfo);
-          answers.employeeName,
+          const intern = new Intern( 
+            answers.employeeName,
             answers.employeeId,
             answers.employeeRole,
             answers.school
+          );
+          teamMembers.push(intern);
         })
       };
-      if (answers.addAnotherEmployee === true) {
+      if (`${answers.addAnotherEmployee}` === true) {
         employeeQuestions();
       }
     });
@@ -157,5 +161,8 @@ function managerQuestions() {
 
   ]).then(answers => {
     const employeeInfo = new Employee(answers)
+    if (answers.addAnotherEmployee === true) {
+      employeeQuestions();
+    }
   })
 };
