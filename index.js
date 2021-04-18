@@ -93,7 +93,7 @@ function employeeQuestions() {
           teamMembers.push(intern);
         })
       };
-      if (`${answers.addAnotherEmployee}` === true) {
+      if (answers.addAnotherEmployee) {
         employeeQuestions();
       }
     });
