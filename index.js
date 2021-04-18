@@ -28,19 +28,19 @@ const baseQuestions = [
         message: 'Are they a manager, engineer, or intern?',
         choices: ['Manager', 'Engineer', 'Intern']
     },
-    {
-        type: 'confirm',
-        name: 'addAnotherEmployee',
-        message: 'Would you like to add another team member?'
-    }
 ];
 
 // Engineer question
 const engiQuestion = [
   {
   type: 'input',
-  name: 'ghProfile',
+  name: 'github',
   message: "GitHub Profile: "
+  },
+  {
+    type: 'confirm',
+    name: 'addAnotherEmployee',
+    message: 'Would you like to add another team member?'
   }
 ];
 
@@ -50,6 +50,11 @@ const internQuestion = [
     type: 'input',
     name: 'school',
     message: "School: "
+  },
+  {
+    type: 'confirm',
+    name: 'addAnotherEmployee',
+    message: 'Would you like to add another team member?'
   }
 ];
 
@@ -121,10 +126,21 @@ function managerQuestions() {
           }
           return "Please enter a valid email address.";
         }
-      }
+        },
+        {
+          type: "input",
+          name: "office",
+          message: "Office Number:",
+          validate: answer => {
+            if (answer !== "") {
+              return true;
+            }
+            return "Please enter at least one character.";
+          }
+        }
+      
     ]).then(answers => {
       const employeeInfo = new Employee(answers)
-      console.log(employeeInfo)
       employeeQuestions();
     });
 }
