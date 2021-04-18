@@ -63,7 +63,16 @@ function employeeQuestions() {
         const employeeId = `${answers.EmployeeId}`;
         const employeeEmail = `${answers.employeeEmail}`;
         console.log(employeeName, employeeEmail, employeeId, employeeRole)
-        
+        if (answers.employeeRole === 'Engineer') {
+          inquirer.prompt(engiQuestion).then((engineerInfo) => {
+            console.log(engineerInfo);
+          }
+          )
+        }else if(answers.Employee === 'Intern') {
+          inquirer.prompt(internQuestion).then((internInfo) => {
+            console.log(internInfo);
+          })
+        }
         if (answers.addAnotherEmployee) {
           employeeQuestions();
         } else {
@@ -117,16 +126,6 @@ function managerQuestions() {
       const employeeInfo = new Employee(answers)
       console.log(employeeInfo)
       employeeQuestions();
-      if (`${employeeInfo.employeeRole === 'Engineer'}`) {
-        inquirer.prompt(engiQuestion).then((engineerInfo) => {
-          console.log(engineerInfo);
-        }
-        )
-      }else if(`${employeeInfo.Employee === 'Intern'}`) {
-        inquirer.prompt(internQuestion).then((internInfo) => {
-          console.log(internInfo);
-        })
-      }
     });
 }
 managerQuestions();
