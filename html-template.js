@@ -49,7 +49,7 @@ const engineerMarkup = (Engineer) => {`<div class="card">
 </div>
 `}
 
-function generateHTML () {
+function render () {
     fs.writeFile('profiles.html', managerMarkup, (err) => {
         if (err)
             console.log(err);
@@ -57,7 +57,7 @@ function generateHTML () {
             console.log('Manager file written successfully');
         }
     })
-    fs.writeFile('profiles.html', internMarkup, (err) => {
+    fs.writeFile('profiles.html', engineerMarkup, (err) => {
         if (err)
             console.log(err);
         else {
@@ -73,4 +73,4 @@ function generateHTML () {
     })
 }
 
-module.exports = 'HTML';
+module.exports = render;

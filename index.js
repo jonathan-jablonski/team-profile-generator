@@ -6,6 +6,7 @@ const teamMembers = [];
 const inquirer = require("inquirer");
 const fs = require("fs");
 const html = require('./html-template');
+const render = require('./html-template');
 
 
 // Employee questions
@@ -89,7 +90,7 @@ function employeeQuestions() {
           teamMembers.push(employeeInfo);
           employeeQuestions();
         } else {
-          fs.writeFileSync("profiles.html", generateHTML(teamMembers), "utf-8");
+          fs.writeFileSync("profiles.html", render(teamMembers), "utf-8");
 
         }
       });
@@ -107,7 +108,7 @@ function employeeQuestions() {
           teamMembers.push(employeeInfo);
           employeeQuestions();
         } else {
-          fs.writeFileSync("profiles.html", generateHTML(teamMembers), "utf-8");
+          fs.writeFileSync("profiles.html", render(teamMembers), "utf-8");
 
         }
       });
@@ -183,7 +184,7 @@ function managerQuestions() {
         console.log(managerInfo)
         employeeQuestions();
       }
-      fs.writeFileSync("profiles.html", generateHTML(teamMembers), "utf-8");
+      fs.writeFileSync("profiles.html", render(teamMembers), "utf-8");
     });
 }
 
