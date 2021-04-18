@@ -2,6 +2,7 @@ const Manager = require('./lib/manager');
 const Employee = require('./lib/employee');
 const Engineer = require('./lib/engineer');
 const intern = require('./lib/intern');
+const teamMembers = [];
 const inquirer = require('inquirer');
 const fs = require('fs');
 
@@ -67,22 +68,6 @@ function employeeQuestions() {
         const employeeRole = `${answers.employeeRole}`;
         const employeeId = `${answers.EmployeeId}`;
         const employeeEmail = `${answers.employeeEmail}`;
-        console.log(employeeName, employeeEmail, employeeId, employeeRole)
-        if (answers.employeeRole === 'Engineer') {
-          inquirer.prompt(engiQuestion).then((engineerInfo) => {
-            console.log(engineerInfo);
-          }
-          )
-        }else if(answers.Employee === 'Intern') {
-          inquirer.prompt(internQuestion).then((internInfo) => {
-            console.log(internInfo);
-          })
-        }
-        if (answers.addAnotherEmployee) {
-          employeeQuestions();
-        } else {
-          console.log('All Done');
-        }
     });
 }
 function managerQuestions() {
@@ -142,6 +127,29 @@ function managerQuestions() {
     ]).then(answers => {
       const employeeInfo = new Employee(answers)
       employeeQuestions();
+      if (answers.employeeRole === 'Engineer') {
+        inquirer.prompt(engiQuestion).then((engineerInfo) => {
+          const engineer = new Engineer (
+            answers.employeeName,
+            answers.employeeId,
+            answers.employeeRole,
+            answers.github
+          );
+          console.log(engineer);
+        }
+        );
+      }else if(answers.employeeRole === 'Intern') {
+        inquirer.prompt(internQuestion).then((internInfo) => {
+          console.log(internInfo);
+          answers.employeeName,
+          answers.employeeId,
+          answers.employeeRole,
+          answers.school
+        })
+      };
+      if (`${answers.addAnotherEmployee}` === 'true') {
+        employeeQuestions();
+      }
     });
 }
 managerQuestions();
