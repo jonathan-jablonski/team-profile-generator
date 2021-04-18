@@ -1,6 +1,7 @@
 const Manager = require('./lib/manager');
 const Intern = require('./lib/intern');
 const Engineer = require('./lib/engineer');
+const fs = require('fs');
 
 
 const managerMarkup = `<div class="card">
@@ -48,6 +49,12 @@ const engineerMarkup = `<div class="card">
 </div>
 `
 
-function teamMemberMarkup () {
-    
+function managerHTML () {
+    fs.writeFile('profiles.html', managerMarkup, (err) => {
+        if (err)
+            console.log(err);
+        else {
+            console.log('File written successfully');
+        }
+    })
 }
