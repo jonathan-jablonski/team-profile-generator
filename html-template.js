@@ -49,12 +49,28 @@ const engineerMarkup = `<div class="card">
 </div>
 `
 
-function managerHTML () {
+function generateHTML () {
     fs.writeFile('profiles.html', managerMarkup, (err) => {
         if (err)
             console.log(err);
         else {
-            console.log('File written successfully');
+            console.log('Manager file written successfully');
+        }
+    })
+    fs.writeFile('profiles.html', internMarkup, (err) => {
+        if (err)
+            console.log(err);
+        else {
+            console.log('Intern file written successfully');
+        }
+    })
+    fs.writeFile('profiles.html', internMarkup, (err) => {
+        if (err)
+            console.log(err);
+        else {
+            console.log('Intern file written successfully');
         }
     })
 }
+
+generateHTML();
