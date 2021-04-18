@@ -63,6 +63,7 @@ function employeeQuestions() {
         const employeeId = `${answers.EmployeeId}`;
         const employeeEmail = `${answers.employeeEmail}`;
         console.log(employeeName, employeeEmail, employeeId, employeeRole)
+        
         if (answers.addAnotherEmployee) {
           employeeQuestions();
         } else {
