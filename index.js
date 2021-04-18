@@ -30,6 +30,11 @@ const baseQuestions = [
     message: 'Are they a manager, engineer, or intern?',
     choices: ['Manager', 'Engineer', 'Intern']
   },
+  {
+    type: 'confirm',
+    name: 'addAnotherEmployee',
+    message: 'Would you like to add another team member?'
+  }
 ];
 
 // Engineer question
@@ -38,11 +43,6 @@ const engiQuestion = [
     type: 'input',
     name: 'github',
     message: "GitHub Profile: "
-  },
-  {
-    type: 'confirm',
-    name: 'addAnotherEmployee',
-    message: 'Would you like to add another team member?'
   }
 ];
 
@@ -52,11 +52,6 @@ const internQuestion = [
     type: 'input',
     name: 'school',
     message: "School:"
-  },
-  {
-    type: 'confirm',
-    name: 'addAnotherEmployee',
-    message: 'Would you like to add another team member?'
   }
 ];
 
@@ -79,6 +74,9 @@ function employeeQuestions() {
             answers.github
           );
           teamMembers.push(engineer);
+          if (answers.addAnotherEmployee) {
+            employeeQuestions();
+          }
         }
         );
       } else if (answers.employeeRole === 'Intern') {
@@ -91,11 +89,11 @@ function employeeQuestions() {
             answers.school
           );
           teamMembers.push(intern);
+          if (answers.addAnotherEmployee) {
+            employeeQuestions();
+          }
         })
       };
-      if (answers.addAnotherEmployee) {
-        employeeQuestions();
-      }
     });
 }
 managerQuestions();
