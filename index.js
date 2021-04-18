@@ -1,11 +1,12 @@
 const Manager = require("./lib/manager");
 const Employee = require("./lib/employee");
 const Engineer = require("./lib/engineer");
-const intern = require("./lib/intern");
+const Intern = require("./lib/intern");
 const teamMembers = [];
 const inquirer = require("inquirer");
 const fs = require("fs");
-const Intern = require("./lib/intern");
+const html = require('./html-template');
+
 
 // Employee questions
 const baseQuestions = [
@@ -88,7 +89,8 @@ function employeeQuestions() {
           teamMembers.push(employeeInfo);
           employeeQuestions();
         } else {
-          // move to writing
+          fs.writeFileSync("profiles.html", generateHTML(teamMembers), "utf-8");
+
         }
       });
     } else if (answers.employeeRole === "Intern") {
@@ -105,7 +107,8 @@ function employeeQuestions() {
           teamMembers.push(employeeInfo);
           employeeQuestions();
         } else {
-          // move to writing
+          fs.writeFileSync("profiles.html", generateHTML(teamMembers), "utf-8");
+
         }
       });
     } else {
@@ -180,6 +183,7 @@ function managerQuestions() {
         console.log(managerInfo)
         employeeQuestions();
       }
+      fs.writeFileSync("profiles.html", generateHTML(teamMembers), "utf-8");
     });
 }
 

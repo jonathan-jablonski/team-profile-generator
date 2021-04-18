@@ -4,7 +4,7 @@ const Engineer = require('./lib/engineer');
 const fs = require('fs');
 
 
-const managerMarkup = `<div class="card">
+const managerMarkup = (Manager) => {`<div class="card">
 <div class="card-header">
     <h2 class="card-title">${ employeeName }</h2>
     <h3 class="card-title"><i class="fas fa-mug-hot mr-2"></i>${ employeeRole }}</h3>
@@ -17,9 +17,9 @@ const managerMarkup = `<div class="card">
     </ul>
 </div>
 </div>
-`
+`}
 
-const internMarkup = `<div class="card">
+const internMarkup = (intern) => {`<div class="card">
 <div class="card-header">
     <h2 class="card-title">${ employeeName }</h2>
     <h3 class="card-title"><i class="fas fa-user-graduate mr-2"></i>{{ role }}</h3>
@@ -32,9 +32,9 @@ const internMarkup = `<div class="card">
     </ul>
 </div>
 </div>
-`
+`}
 
-const engineerMarkup = `<div class="card">
+const engineerMarkup = (Engineer) => {`<div class="card">
 <div class="card-header">
     <h2 class="card-title">${ employeeName }</h2>
     <h3 class="card-title"><i class="fas fa-user-graduate mr-2"></i>{{ role }}</h3>
@@ -47,7 +47,7 @@ const engineerMarkup = `<div class="card">
     </ul>
 </div>
 </div>
-`
+`}
 
 function generateHTML () {
     fs.writeFile('profiles.html', managerMarkup, (err) => {
@@ -73,4 +73,4 @@ function generateHTML () {
     })
 }
 
-generateHTML();
+module.exports = 'HTML';
