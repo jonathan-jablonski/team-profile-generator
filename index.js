@@ -174,9 +174,10 @@ function managerQuestions() {
       },
     ])
     .then((answers) => {
-      const employeeInfo = new Employee(answers);
-      teamMembers.push(employeeInfo);
+      const managerInfo = new Manager(answers);
+      teamMembers.push(managerInfo);
       if (answers.addAnotherEmployee) {
+        console.log(managerInfo)
         employeeQuestions();
       }
     });
