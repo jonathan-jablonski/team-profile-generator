@@ -80,7 +80,7 @@ function employeeQuestions() {
       inquirer.prompt(engiQuestion).then((engineerInfo) => {
         console.log(engineerInfo);
         employeeInfo.school = engineerInfo.github;
-        employeeInfo = new Engineer(
+        const engineer = new Engineer(
           employeeInfo.employeeName,
           employeeInfo.employeeId,
           employeeInfo.employeeRole,
@@ -90,7 +90,7 @@ function employeeQuestions() {
           teamMembers.push(employeeInfo);
           employeeQuestions();
         } else {
-          fs.writeFileSync("profiles.html", render(teamMembers), "utf-8");
+          fs.writeFileSync("profiles.html", render(engineer), "utf-8");
 
         }
       });
@@ -98,17 +98,17 @@ function employeeQuestions() {
       inquirer.prompt(internQuestion).then((internInfo) => {
         console.log(internInfo);
         employeeInfo.school = internInfo.school;
-        employeeInfo = new Intern(
+        const intern = new Intern(
           employeeInfo.employeeName,
           employeeInfo.employeeId,
           employeeInfo.employeeRole,
           internInfo.school
         );
         if (internInfo.addAnotherEmployee) {
-          teamMembers.push(employeeInfo);
+          teamMembers.push(intern);
           employeeQuestions();
         } else {
-          fs.writeFileSync("profiles.html", render(teamMembers), "utf-8");
+          fs.writeFileSync("profiles.html", render(intern), "utf-8");
 
         }
       });
@@ -178,13 +178,13 @@ function managerQuestions() {
       },
     ])
     .then((answers) => {
-      const managerInfo = new Manager(answers);
-      teamMembers.push(managerInfo);
+      const manager = new Manager(answers.managerName, answers.managerId, answers.managerEmail, answers.office);
+      teamMembers.push(manager);
       if (answers.addAnotherEmployee) {
-        console.log(managerInfo)
+        console.log(manager)
         employeeQuestions();
       }
-      fs.writeFileSync("profiles.html", render(teamMembers), "utf-8");
+      fs.writeFileSync("profiles.html", render(manager), "utf-8");
     });
 }
 
