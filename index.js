@@ -1,6 +1,13 @@
+const Manager = require('./lib/manager');
+const Employee = require('./lib/employee');
+const Engineer = require('./lib/engineer');
+const intern = require('./lib/intern');
 const inquirer = require('inquirer');
 const fs = require('fs');
-const questions = [{
+
+// Employee questions
+const baseQuestions = [
+  {
         type: 'input',
         name: 'employeeName',
         message: "What's their first and last name?"
@@ -27,9 +34,28 @@ const questions = [{
         message: 'Would you like to add another team member?'
     }
 ];
+
+// Engineer question
+const engiQuestion = [
+  {
+  type: 'input',
+  name: 'ghProfile',
+  message: "GitHub Profile: "
+  }
+];
+
+// Intern question
+const internQuestion = [
+  {
+    type: 'input',
+    name: 'school',
+    message: "School: "
+  }
+];
+
 function employeeQuestions() {
     console.log('Add a team member or two!')
-    inquirer.prompt(questions)
+    inquirer.prompt(baseQuestions)
         .then(answers => {
             console.log(`${answers.addAnotherEmployee}`);
         const employeeName = `${answers.employeeName}`;
@@ -87,8 +113,19 @@ function managerQuestions() {
         }
       }
     ]).then(answers => {
-      const employeeInfo = new Employee(response);
+      const employeeInfo = new Employee(answers)
+      console.log(employeeInfo)
       employeeQuestions();
+      if (`${employeeInfo.employeeRole === 'Engineer'}`) {
+        inquirer.prompt(engiQuestion).then((engineerInfo) => {
+          console.log(engineerInfo);
+        }
+        )
+      }else if(`${employeeInfo.Employee === 'Intern'}`) {
+        inquirer.prompt(internQuestion).then((internInfo) => {
+          console.log(internInfo);
+        })
+      }
     });
-  }
+}
 managerQuestions();
