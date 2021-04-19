@@ -5,33 +5,34 @@ const fs = require('fs');
 
 
 const managerMarkup = (Manager) => {
-    // console.log(Manager)
-    // console.log(Manager[0].employeeName)
+    console.log(Manager);
     return `<div class="card">
 <div class="card-header">
-    <h2 class="card-title">${ Manager[0].employeeName }</h2>
-    <h3 class="card-title"><i class="fas fa-mug-hot mr-2"></i>${ Manager[0].employeeRole }}</h3>
+    <h2 class="card-title">${ Manager.employeeName }</h2>
+    <h3 class="card-title"><i class="fas fa-mug-hot mr-2"></i>Manager</h3>
 </div>
 <div class="card-body">
     <ul class="list-group">
-        <li class="list-group-item"> ID #: ${ Manager[0].employeeInfo.managerId }</li>
-        <li class="list-group-item"> Email: <a href="mailto:${ Manager[0].employeeEmail }">${ Manager[0].employeeEmail }</a></li>
-        <li class="list-group-item"> Office Number: ${ Manager[0].office }</li>
+        <li class="list-group-item"> ID #: ${ Manager.employeeId }</li>
+        <li class="list-group-item"> Email: <a href="mailto:${ Manager.employeeEmail }">${ Manager.employeeEmail }</a></li>
+        <li class="list-group-item"> Office Number: ${ Manager.office }</li>
     </ul>
 </div>
 </div>
 `}
 
-const internMarkup = (Intern) => {`<div class="card">
+const internMarkup = (Intern) => {
+    console.log(Intern);
+    return `<div class="card">
 <div class="card-header">
-    <h2 class="card-title">${ employeeName }</h2>
-    <h3 class="card-title"><i class="fas fa-user-graduate mr-2"></i>{{ role }}</h3>
+    <h2 class="card-title">${ Intern.employeeName }</h2>
+    <h3 class="card-title"><i class="fas fa-user-graduate mr-2"></i>Intern</h3>
 </div>
 <div class="card-body">
     <ul class="list-group">
-        <li class="list-group-item"> ID #: ${ employeeId }</li>
-        <li class="list-group-item"> Email: <a href="mailto:${ employeeEmail }">${ employeeEmail }</a></li>
-        <li class="list-group-item"> School: ${ school }</li>
+        <li class="list-group-item"> ID #: ${ Intern.employeeId }</li>
+        <li class="list-group-item"> Email: <a href="mailto:${ Intern.employeeEmail }">${ Intern.employeeEmail }</a></li>
+        <li class="list-group-item"> School: ${ Intern.school }</li>
     </ul>
 </div>
 </div>
@@ -40,7 +41,7 @@ const internMarkup = (Intern) => {`<div class="card">
 const engineerMarkup = (Engineer) => {`<div class="card">
 <div class="card-header">
     <h2 class="card-title">${ employeeName }</h2>
-    <h3 class="card-title"><i class="fas fa-user-graduate mr-2"></i>{{ role }}</h3>
+    <h3 class="card-title"><i class="fas fa-user-graduate mr-2"></i>Engineer</h3>
 </div>
 <div class="card-body">
     <ul class="list-group">
@@ -53,7 +54,8 @@ const engineerMarkup = (Engineer) => {`<div class="card">
 `}
 
 function render (teamMembers) {
-    fs.writeFile('profiles.html', managerMarkup(teamMembers), (err) => {
+    console.log(teamMembers);
+    fs.writeFile("./src/manager.html", managerMarkup(Manager), (err) => {
         if (err)
             console.log(err);
         else {
@@ -67,13 +69,13 @@ function render (teamMembers) {
 //             console.log('Intern file written successfully');
 //         }
 //     })
-//     fs.writeFile('profiles.html', internMarkup, (err) => {
-//         if (err)
-//             console.log(err);
-//         else {
-//             console.log('Intern file written successfully');
-//         }
-//     })
-// }
+    fs.writeFile('./src/intern.html', internMarkup(Intern), (err) => {
+        if (err)
+            console.log(err);
+        else {
+            console.log('Intern file written successfully');
+        }
+    })
 }
+
 module.exports = render;

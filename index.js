@@ -86,11 +86,10 @@ function employeeQuestions() {
           employeeInfo.employeeRole,
           employeeInfo.github
         );
-        if (engineerInfo.addAnotherEmployee) {
+        if (engineer.addAnotherEmployee) {
           teamMembers.push(employeeInfo);
+          render(engineer);
           employeeQuestions();
-        } else {
-          fs.writeFileSync("profiles.html", render(engineer), "utf-8");
 
         }
       });
@@ -99,21 +98,19 @@ function employeeQuestions() {
         console.log(internInfo);
         employeeInfo.school = internInfo.school;
         const intern = new Intern(
-          employeeInfo.employeeName,
-          employeeInfo.employeeId,
-          employeeInfo.employeeRole,
+          answers.employeeName,
+          answers.employeeId,
+          answers.employeeRole,
+          answers.employeeEmail,
           internInfo.school
         );
-        if (internInfo.addAnotherEmployee) {
+        render(intern);
+        if (answers.addAnotherEmployee) {
           teamMembers.push(intern);
           employeeQuestions();
-        } else {
-          fs.writeFileSync("profiles.html", render(intern), "utf-8");
-
         }
       });
     } else {
-      console.log('Manager');
       if (employeeInfo.addAnotherEmployee) {
         teamMembers.push(employeeInfo);
         employeeQuestions();
@@ -180,12 +177,11 @@ function managerQuestions() {
     .then((answers) => {
       const manager = new Manager(answers.managerName, answers.managerId, answers.managerEmail, answers.office);
       teamMembers.push(manager);
+      render(manager);
       if (answers.addAnotherEmployee) {
-        console.log(manager)
         employeeQuestions();
       }
-      fs.writeFileSync("profiles.html", render(manager), "utf-8");
     });
 }
-
+console.log(teamMembers);
 managerQuestions();
